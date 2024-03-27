@@ -1,0 +1,50 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class ShuffleString {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        // getting inputs from user
+        System.out.print("enter a string : ");
+        String word = input.next();
+        System.out.print("enter a number : ");
+        int number = input.nextInt();
+        char [] wordArray = word.toCharArray();
+
+
+        shuffleString(wordArray,number,0,wordArray.length / 2 , wordArray.length);
+        System.out.println("WordArray : "  + Arrays.toString(wordArray));
+
+    }
+    private static void shuffleString(char[] str, int number , int start  , int middle , int end ) {
+
+        if(number == 0){
+            return ;
+        }
+
+        // swap operation
+        swapArray(str ,start , middle , end );
+        // left part
+        shuffleString(str,number-1 , start , (start + middle) / 2 , middle);
+        // right part
+        shuffleString(str,number-1, middle , (middle  + end ) / 2 , end );
+
+    }
+
+    private static void swapArray(char[] str, int start , int middle , int end ) {
+
+        char temp;
+        int pointer = middle;
+
+        while (start < middle){
+            temp = str[start];
+            str[start] = str[pointer];
+            str[pointer] = temp;
+            pointer++;
+            start++;
+        }
+
+    }
+}
